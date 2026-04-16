@@ -1,10 +1,10 @@
 export const siteIdentity = {
   code: process.env.NEXT_PUBLIC_SITE_CODE || 'tb4m7q9x2v',
   name: process.env.NEXT_PUBLIC_SITE_NAME || 'Tote Bagus',
-  tagline: process.env.NEXT_PUBLIC_SITE_TAGLINE || 'Visual classified platform',
+  tagline: process.env.NEXT_PUBLIC_SITE_TAGLINE || 'Image-led finds with deal-driven browsing',
   description:
     process.env.NEXT_PUBLIC_SITE_DESCRIPTION ||
-    'A hybrid marketplace for image-first discoveries, quick deals, and classified-style publishing.',
+    'A visual shopping and classifieds experience built around standout images and quick browsing.',
   domain: process.env.NEXT_PUBLIC_SITE_DOMAIN || 'totebagus.com',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://totebagus.com',
   ogImage: process.env.NEXT_PUBLIC_SITE_OG_IMAGE || '/og-default.png',
