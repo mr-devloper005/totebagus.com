@@ -38,7 +38,7 @@ export default function BookmarkCollectionDetailPage() {
 
   if (!collection) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="tote-page-frame">
         <NavbarShell />
         <main className="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8">
           <Card className="border-border bg-card">
@@ -57,11 +57,11 @@ export default function BookmarkCollectionDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="tote-page-frame">
       <NavbarShell />
 
       <main>
-        <section className="border-b border-border bg-secondary/30">
+        <section className="border-b border-[#dfe8e4] bg-[linear-gradient(165deg,#f5f7f9_0%,#eef5f2_100%)]">
           <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
             <Link
               href="/sbm/collections"
