@@ -30,6 +30,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { NavbarShell } from "@/components/shared/navbar-shell"
+import { Footer } from "@/components/shared/footer"
 import { useAuth } from "@/lib/auth-context"
 import { useToast } from "@/components/ui/use-toast"
 import { loadFromStorage, saveToStorage, storageKeys } from "@/lib/local-storage"
@@ -236,11 +237,11 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="tote-page-frame">
       <NavbarShell />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold text-foreground mb-8">Settings</h1>
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+        <h1 className="mb-8 text-3xl font-semibold tracking-tight text-[#1a2e28]">Settings</h1>
 
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
@@ -763,6 +764,7 @@ export default function SettingsPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
