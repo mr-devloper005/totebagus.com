@@ -95,7 +95,7 @@ export default async function PdfDetailPage({ params }: { params: Promise<{ slug
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="tote-page-frame">
       <NavbarShell />
       <main className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
         <SchemaJsonLd data={breadcrumbData} />
