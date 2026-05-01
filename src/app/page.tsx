@@ -201,18 +201,6 @@ function DirectoryHome({ primaryTask, enabledTasks, listingPosts, classifiedPost
                     <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${tone.accentSoft}`}>Live feed</span>
                   </div>
                   <h2 className="mt-3 text-2xl font-semibold tracking-tight text-[#1a2e28]">Your corner for hauls & snapshots</h2>
-                  <div className="mt-5 grid grid-cols-3 gap-3 text-center">
-                    {[
-                      ['Posts', String(Math.max(featuredListings.length * 4, 12))],
-                      ['Views', '24k'],
-                      ['Saved', '1.2k'],
-                    ].map(([k, v]) => (
-                      <div key={k} className={`rounded-xl py-3 ${tone.soft}`}>
-                        <p className="text-lg font-semibold tabular-nums text-[#1a2e28]">{v}</p>
-                        <p className="text-[10px] font-semibold uppercase tracking-wider text-[#5a6f68]">{k}</p>
-                      </div>
-                    ))}
-                  </div>
                   <Link href={imageHref} className={`mt-5 flex w-full items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${tone.action}`}>
                     Create post
                     <Sparkles className="h-4 w-4" />

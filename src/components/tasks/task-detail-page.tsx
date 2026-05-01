@@ -11,6 +11,7 @@ import { buildPostUrl, fetchTaskPostBySlug, fetchTaskPosts } from "@/lib/task-da
 import { SITE_CONFIG, getTaskConfig, type TaskKey } from "@/lib/site-config";
 import type { SitePost } from "@/lib/site-connector";
 import { TaskImageCarousel } from "@/components/tasks/task-image-carousel";
+import { TaskImageGallery } from "@/components/tasks/task-image-gallery";
 import { cn } from "@/lib/utils";
 import { ArticleComments } from "@/components/tasks/article-comments";
 import { SchemaJsonLd } from "@/components/seo/schema-jsonld";
@@ -312,7 +313,11 @@ export async function TaskDetailPage({ task, slug }: { task: TaskKey; slug: stri
               <>
                 {!isBookmark ? (
                   <div className={cn(isClassified ? "w-full" : "")}>
-                    <TaskImageCarousel images={images} />
+                    {task === "image" ? (
+                      <TaskImageGallery images={images} title={post.title} />
+                    ) : (
+                      <TaskImageCarousel images={images} />
+                    )}
                   </div>
                 ) : null}
 

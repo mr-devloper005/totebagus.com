@@ -71,8 +71,8 @@ export async function TaskListPage({ task, category }: { task: TaskKey; category
   }
 
   const taskConfig = getTaskConfig(task)
-  const posts = await fetchTaskPosts(task, 30)
   const normalizedCategory = category ? normalizeCategory(category) : 'all'
+  const posts = await fetchTaskPosts(task, 30, { category: normalizedCategory !== 'all' ? normalizedCategory : undefined })
   const intro = taskIntroCopy[task]
   const baseUrl = SITE_CONFIG.baseUrl.replace(/\/$/, '')
   const schemaItems = posts.slice(0, 10).map((post, index) => ({
@@ -321,10 +321,17 @@ export async function TaskListPage({ task, category }: { task: TaskKey; category
         {layoutKey === 'profile-creator' || layoutKey === 'profile-business' ? (
           <section className={`mb-12 rounded-[2.2rem] p-8 shadow-[0_24px_70px_rgba(15,23,42,0.1)] ${ui.panel}`}>
             <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-              <div className={`min-h-[240px] rounded-[2rem] ${ui.soft}`} />
+              <div className={`flex min-h-[240px] items-center justify-center rounded-[2rem] ${ui.soft}`}>
+                <div className="flex flex-col items-center gap-4">
+                  <div className="flex h-20 w-20 items-center justify-center rounded-2xl border border-white/10 bg-white/10">
+                    <User className="h-10 w-10 text-white/70" />
+                  </div>
+                  <span className="text-xs font-medium uppercase tracking-wider text-white/50">Profile Hub</span>
+                </div>
+              </div>
               <div>
                 <p className={`text-xs uppercase tracking-[0.3em] ${ui.muted}`}>{taskConfig?.label || task}</p>
-                <h1 className="mt-3 text-4xl font-semibold tracking-[-0.05em] text-foreground">Profiles with stronger identity, trust, and reputation cues.</h1>
+                <h1 className="mt-3 text-4xl font-semibold tracking-[-0.05em] text-white">Profiles with stronger identity, trust, and reputation cues.</h1>
                 <p className={`mt-5 max-w-2xl text-sm leading-8 ${ui.muted}`}>This layout prioritizes the person or business surface first, then lets the feed continue below without borrowing the same visual logic used by articles or listings.</p>
               </div>
             </div>
