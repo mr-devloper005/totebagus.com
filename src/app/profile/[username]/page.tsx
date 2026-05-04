@@ -111,9 +111,10 @@ export default async function ProfileDetailPage({ params }: { params: Promise<{ 
       <NavbarShell />
       <main className="mx-auto w-full max-w-6xl px-4 pb-16 pt-10 sm:px-6 lg:px-8">
         <SchemaJsonLd data={breadcrumbData} />
-        <section className="rounded-3xl border border-border/60 bg-white/90 p-8 shadow-sm md:p-12">
-          <div className="grid gap-8 md:grid-cols-[200px_1fr] md:items-start">
-            <div className="flex justify-center md:justify-start">
+        <section className="grid gap-6 md:grid-cols-2">
+          {/* Card 1: Brand Identity */}
+          <div className="rounded-3xl border border-border/60 bg-white/90 p-8 shadow-sm">
+            <div className="flex flex-col items-center text-center">
               <div className="relative h-36 w-36 overflow-hidden rounded-full border border-border/70 bg-muted">
                 {logoUrl ? (
                   <ContentImage src={logoUrl} alt={post.title} fill className="object-cover" sizes="144px" intrinsicWidth={144} intrinsicHeight={144} />
@@ -123,26 +124,29 @@ export default async function ProfileDetailPage({ params }: { params: Promise<{ 
                   </div>
                 )}
               </div>
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold text-foreground sm:text-4xl">{brandName}</h1>
+              <h1 className="mt-6 text-2xl font-bold text-foreground sm:text-3xl">{brandName}</h1>
               {domain ? (
-                <p className="mt-1 text-sm font-medium text-muted-foreground">{domain}</p>
-              ) : null}
-              <article
-                className="article-content prose prose-slate mt-6 max-w-2xl text-base leading-relaxed prose-p:my-4 prose-a:text-primary prose-a:underline prose-strong:font-semibold"
-                dangerouslySetInnerHTML={{ __html: descriptionHtml }}
-              />
-              {website ? (
-                <div className="mt-8">
-                  <Button asChild size="lg" className="px-7 text-base">
-                    <Link href={website} target="_blank" rel="noopener noreferrer">
-                      Visit Official Site
-                    </Link>
-                  </Button>
-                </div>
+                <p className="mt-2 text-sm font-medium text-muted-foreground">{domain}</p>
               ) : null}
             </div>
+          </div>
+
+          {/* Card 2: About & Website */}
+          <div className="rounded-3xl border border-border/60 bg-white/90 p-8 shadow-sm">
+            <h2 className="text-lg font-semibold text-foreground">About</h2>
+            <article
+              className="article-content prose prose-slate mt-4 max-w-2xl text-base leading-relaxed prose-p:my-4 prose-a:text-primary prose-a:underline prose-strong:font-semibold"
+              dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+            />
+            {website ? (
+              <div className="mt-6">
+                <Button asChild size="lg" className="px-7 text-base">
+                  <Link href={website} target="_blank" rel="noopener noreferrer">
+                    Visit Official Site
+                  </Link>
+                </Button>
+              </div>
+            ) : null}
           </div>
         </section>
 

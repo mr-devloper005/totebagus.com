@@ -7,6 +7,7 @@ import type { TaskKey } from '@/lib/site-config'
 import { SITE_THEME } from '@/config/site.theme'
 import { getFactoryState } from '@/design/factory/get-factory-state'
 import { TASK_POST_CARD_OVERRIDE_ENABLED, TaskPostCardOverride } from '@/overrides/task-post-card'
+import { cn } from '@/lib/utils'
 
 type ListingContent = {
   location?: string
@@ -183,9 +184,78 @@ export function TaskPostCard({
     )
   }
 
+  if (variant === 'image') {
+    return (
+      <Link href={href} className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[#dfe8e4] bg-white shadow-[0_18px_42px_rgba(45,90,76,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_56px_rgba(45,90,76,0.16)]">
+        <div className="relative aspect-[4/5] overflow-hidden bg-[#edf4f1]">
+          <ContentImage src={image} alt={altText} fill sizes={imageSizes} quality={75} className="object-cover transition-transform duration-500 group-hover:scale-[1.05]" intrinsicWidth={960} intrinsicHeight={1200} />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#10261f]/70 via-transparent to-transparent opacity-85" />
+          <span className="absolute left-4 top-4 inline-flex items-center gap-1 rounded-full bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#1a2e28] shadow-sm">
+            <Tag className="h-3.5 w-3.5" />
+            {category}
+          </span>
+          <div className="absolute inset-x-0 bottom-0 p-4">
+            <div className="rounded-[1.25rem] border border-white/15 bg-white/10 p-3 backdrop-blur-sm">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/80">Image post</p>
+              <h3 className="mt-1 line-clamp-2 text-lg font-semibold leading-snug text-white">{post.title}</h3>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-1 flex-col p-5">
+          <p className="line-clamp-3 text-sm leading-7 text-[#4a635c]">{getExcerpt(content.description || post.summary, compact ? 110 : 150) || 'Browse this image post.'}</p>
+          <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-[#5a6f68]">
+            {content.location ? <span className="inline-flex items-center gap-1"><MapPin className="h-3.5 w-3.5 text-[#2d5a4c]" />{content.location}</span> : null}
+            {content.email ? <span className="inline-flex items-center gap-1"><Mail className="h-3.5 w-3.5 text-[#2d5a4c]" />{content.email}</span> : null}
+          </div>
+          <div className="mt-auto pt-5 text-sm font-semibold text-[#2d5a4c]">Open gallery item</div>
+        </div>
+      </Link>
+    )
+  }
+
+  if (variant === 'profile') {
+    const logoCharacter = post.title.slice(0, 1).toUpperCase()
+
+    return (
+      <Link href={href} className="group flex h-full flex-col overflow-hidden rounded-[1.9rem] border border-white/10 bg-[linear-gradient(180deg,rgba(30,41,59,0.8)_0%,rgba(15,23,42,0.9)_100%)] shadow-[0_20px_48px_rgba(0,0,0,0.3)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_68px_rgba(0,0,0,0.4)]">
+        <div className="relative h-28 bg-[radial-gradient(circle_at_top_right,rgba(45,90,76,0.25),transparent_34%),linear-gradient(135deg,rgba(51,65,85,0.6)_0%,rgba(30,41,59,0.8)_100%)]">
+          <div className="absolute inset-x-0 bottom-0 px-5">
+            <div className="translate-y-1/2">
+              <div className="relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-[1.5rem] border border-white/20 bg-slate-800 shadow-[0_14px_28px_rgba(0,0,0,0.3)]">
+                {image && !image.includes('/placeholder.svg') ? (
+                  <ContentImage src={image} alt={altText} fill sizes="80px" quality={75} className="object-cover" intrinsicWidth={160} intrinsicHeight={160} />
+                ) : (
+                  <span className="text-2xl font-semibold text-white">{logoCharacter}</span>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-1 flex-col px-5 pb-5 pt-14">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1 rounded-full bg-[#2d5a4c] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white">
+              <Tag className="h-3.5 w-3.5" />
+              {category}
+            </span>
+            <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-300">
+              Profile
+            </span>
+          </div>
+          <h3 className="mt-4 line-clamp-2 text-xl font-semibold leading-snug text-white">{post.title}</h3>
+          <p className="mt-3 line-clamp-3 text-sm leading-7 text-slate-300">{getExcerpt(content.description || post.summary, compact ? 110 : 150) || 'Explore this profile.'}</p>
+          <div className="mt-4 flex flex-wrap gap-3 text-xs text-slate-400">
+            {content.location ? <span className="inline-flex items-center gap-1"><MapPin className="h-3.5 w-3.5 text-[#8df0c8]" />{content.location}</span> : null}
+            {content.email ? <span className="inline-flex items-center gap-1"><Mail className="h-3.5 w-3.5 text-[#8df0c8]" />{content.email}</span> : null}
+          </div>
+          <div className="mt-auto pt-5 text-sm font-semibold text-[#8df0c8]">View profile</div>
+        </div>
+      </Link>
+    )
+  }
+
   return (
     <Link href={href} className={`group flex h-full flex-col overflow-hidden transition duration-300 ${visualVariant.frame}`}>
-      <div className={`relative ${imageAspect} overflow-hidden bg-[#ede2dc]`}>
+      <div className={cn(`relative ${imageAspect} overflow-hidden bg-[#ede2dc]`, compact ? 'min-h-[220px]' : '')}>
         <ContentImage src={image} alt={altText} fill sizes={imageSizes} quality={75} className="object-cover transition-transform duration-500 group-hover:scale-[1.04]" intrinsicWidth={960} intrinsicHeight={720} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-80" />
         <span className={`absolute left-4 top-4 inline-flex items-center gap-1 rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] ${visualVariant.badge}`}>
