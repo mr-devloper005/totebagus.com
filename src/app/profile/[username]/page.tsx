@@ -33,7 +33,13 @@ const sanitizeRichHtml = (html: string) =>
 const formatRichHtml = (raw?: string | null, fallback = "Profile details will appear here once available.") => {
   const source = typeof raw === "string" ? raw.trim() : "";
   if (!source) return `<p>${escapeHtml(fallback)}</p>`;
-  if (/<[a-z][\s\S]*>/i.test(source)) return sanitizeRichHtml(source);
+  
+  // Check if content contains HTML tags (more comprehensive check)
+  const hasHtmlTags = /<[a-z][\s\S]*>/i.test(source) || 
+                      /<(div|p|span|h[1-6]|ul|ol|li|a|strong|b|em|i|br|img)\b[^>]*>/i.test(source) ||
+                      source.includes('<');
+  
+  if (hasHtmlTags) return sanitizeRichHtml(source);
   return source
     .split(/\n{2,}/)
     .map((paragraph) => `<p>${escapeHtml(paragraph.replace(/\n/g, " ").trim())}</p>`)

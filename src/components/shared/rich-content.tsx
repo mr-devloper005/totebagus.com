@@ -40,7 +40,13 @@ export const formatRichHtml = (raw?: string | null, fallback = "Details coming s
   const source = typeof raw === "string" ? raw.trim() : "";
   if (!source) return `<p>${escapeHtml(fallback)}</p>`;
   const decodedSource = decodeHtmlEntities(source);
-  if (/<[a-z][\s\S]*>/i.test(decodedSource)) {
+  
+  // Check if content contains HTML tags (more comprehensive check)
+  const hasHtmlTags = /<[a-z][\s\S]*>/i.test(decodedSource) || 
+                      /<(div|p|span|h[1-6]|ul|ol|li|a|strong|b|em|i|br|img)\b[^>]*>/i.test(decodedSource) ||
+                      decodedSource.includes('<');
+  
+  if (hasHtmlTags) {
     return sanitizeRichHtml(decodedSource);
   }
 
