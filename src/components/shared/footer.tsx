@@ -106,7 +106,7 @@ export function Footer() {
                 </Link>
               ) : null}
             </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-3">
+            <div className="grid gap-6 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-2">
               <div>
                 <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-[#5a6f68]">Explore</h3>
                 <ul className="mt-4 space-y-3 text-sm text-[#2d4a42]">
@@ -123,17 +123,7 @@ export function Footer() {
                   ))}
                 </ul>
               </div>
-              <div>
-                <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-[#5a6f68]">Connect</h3>
-                <div className="mt-4 flex gap-3">
-                  {socialLinks.map((item) => (
-                    <Link key={item.name} href={item.href} target="_blank" rel="noopener noreferrer" className="rounded-full border border-[#dfe8e4] bg-white p-2.5 text-[#4a635c] shadow-sm transition-colors hover:border-[#2d5a4c]/30 hover:text-[#2d5a4c]">
-                      <item.icon className="h-4 w-4" />
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
+                          </div>
           </div>
           <div className="mt-10 border-t border-[#dfe8e4] pt-5 text-sm text-[#5a6f68]">&copy; {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.</div>
         </div>
