@@ -147,9 +147,8 @@ export const taskIntroCopy: Record<
       'Browse by category to find announcements quickly, then continue into related sections when you need more detail.',
     ],
     links: [
-      { label: 'Business listings', href: '/listings' },
-      { label: 'Read articles', href: '/articles' },
-      { label: 'View profiles', href: '/profile' },
+      { label: 'Search', href: '/search' },
+
     ],
   },
   image: {
@@ -160,9 +159,7 @@ export const taskIntroCopy: Record<
       'Browse the latest visual updates, then continue into related stories or supporting pages for more context.',
     ],
     links: [
-      { label: 'Read articles', href: '/articles' },
-      { label: 'Explore listings', href: '/listings' },
-      { label: 'Open classifieds', href: '/classifieds' },
+      { label: 'Search', href: '/search' },
     ],
   },
   profile: {
