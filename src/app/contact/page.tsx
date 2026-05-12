@@ -1,68 +1,56 @@
-import { Camera, Mail, MapPin, Phone, Sparkles, Tag } from 'lucide-react'
-import { NavbarShell } from '@/components/shared/navbar-shell'
-import { Footer } from '@/components/shared/footer'
-import { SITE_CONFIG } from '@/lib/site-config'
-import { CONTACT_PAGE_OVERRIDE_ENABLED, ContactPageOverride } from '@/overrides/contact-page'
+import { Mail, MessageSquareText, ShieldCheck } from 'lucide-react';
 
-const tote = {
-  panel: 'border border-[#dfe8e4] bg-white shadow-[0_22px_56px_rgba(45,90,76,0.08)]',
-  soft: 'border border-[#dfe8e4] bg-[#f8faf9]',
-  muted: 'text-[#4a635c]',
-  action: 'bg-[#2d5a4c] text-white shadow-[0_14px_32px_rgba(45,90,76,0.22)] hover:bg-[#23463c]',
-}
+import { ContactLeadForm } from '@/components/shared/contact-lead-form';
+import { Footer } from '@/components/shared/footer';
+import { NavbarShell } from '@/components/shared/navbar-shell';
 
-const lanes = [
-  { icon: Tag, title: 'Classifieds & deals', body: 'Bulk uploads, pricing rules, and moderation for high-volume sellers.' },
-  { icon: Camera, title: 'Gallery & media', body: 'Licensing, CDN limits, and creator programs for photo-heavy accounts.' },
-  { icon: MapPin, title: 'Coverage & trust', body: 'Request new regions, verification flows, or safety partnerships.' },
-  { icon: Phone, title: 'Phone support', body: 'Operational issues and account recovery with a human on the line.' },
-  { icon: Mail, title: 'Press & partnerships', body: 'Collaborations that match the forest + mist brand system.' },
-  { icon: Sparkles, title: 'Product feedback', body: 'Tell us what would make listing and browsing faster for your team.' },
-]
+const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'Tote Bagus';
+
+const contactHighlights = [
+  { icon: Mail, title: 'Direct response', copy: 'Your message is saved securely and routed to the right team.' },
+  { icon: MessageSquareText, title: 'Clear details', copy: 'Share your requirement, question, or collaboration idea in one place.' },
+  { icon: ShieldCheck, title: 'Reliable follow-up', copy: 'We keep the request record so every conversation stays traceable.' },
+];
 
 export default function ContactPage() {
-  if (CONTACT_PAGE_OVERRIDE_ENABLED) {
-    return <ContactPageOverride />
-  }
-
   return (
-    <div className="tote-page-frame">
+    <div className="min-h-screen bg-[#f7f1e8] text-stone-950">
       <NavbarShell />
-      <main className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <section className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#5a6f68]">Contact {SITE_CONFIG.name}</p>
-            <h1 className="mt-4 text-4xl font-semibold tracking-tight text-[#1a2e28] sm:text-5xl">We respond with the same calm UI you see everywhere else.</h1>
-            <p className={`mt-5 max-w-2xl text-sm leading-relaxed ${tote.muted}`}>
-              Pick the lane closest to your question. Every card below uses the same borders, radii, and forest accents as the homepage so the experience stays coherent.
-            </p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              {lanes.map((lane) => (
-                <div key={lane.title} className={`rounded-[1.5rem] p-5 shadow-sm ${tote.soft}`}>
-                  <lane.icon className="h-5 w-5 text-[#2d5a4c]" />
-                  <h2 className="mt-3 text-lg font-semibold text-[#1a2e28]">{lane.title}</h2>
-                  <p className={`mt-2 text-sm leading-relaxed ${tote.muted}`}>{lane.body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+      <main>
+        <section className="relative overflow-hidden px-6 py-20 md:px-10 lg:px-16">
+          <div className="absolute left-[-10%] top-10 h-72 w-72 rounded-full bg-amber-200/40 blur-3xl" />
+          <div className="absolute bottom-0 right-[-8%] h-80 w-80 rounded-full bg-stone-300/50 blur-3xl" />
 
-          <div className={`rounded-[2rem] p-7 ${tote.panel}`}>
-            <h2 className="text-2xl font-semibold text-[#1a2e28]">Send a message</h2>
-            <p className={`mt-2 text-sm ${tote.muted}`}>We typically reply within two business days.</p>
-            <form className="mt-6 grid gap-4">
-              <input className="h-12 rounded-xl border border-[#dfe8e4] bg-white px-4 text-sm text-[#1a2e28] outline-none ring-offset-2 placeholder:text-[#7a9088] focus:ring-2 focus:ring-[#2d5a4c]/30" placeholder="Your name" />
-              <input className="h-12 rounded-xl border border-[#dfe8e4] bg-white px-4 text-sm text-[#1a2e28] outline-none ring-offset-2 placeholder:text-[#7a9088] focus:ring-2 focus:ring-[#2d5a4c]/30" placeholder="Email address" type="email" />
-              <input className="h-12 rounded-xl border border-[#dfe8e4] bg-white px-4 text-sm text-[#1a2e28] outline-none ring-offset-2 placeholder:text-[#7a9088] focus:ring-2 focus:ring-[#2d5a4c]/30" placeholder="Topic (e.g. classifieds, photos, billing)" />
-              <textarea className="min-h-[180px] rounded-2xl border border-[#dfe8e4] bg-white px-4 py-3 text-sm text-[#1a2e28] outline-none ring-offset-2 placeholder:text-[#7a9088] focus:ring-2 focus:ring-[#2d5a4c]/30" placeholder="Share context so we can route you to the right person." />
-              <button type="submit" className={`inline-flex h-12 items-center justify-center rounded-full px-6 text-sm font-semibold ${tote.action}`}>
-                Send message
-              </button>
-            </form>
+          <div className="relative mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.35em] text-stone-500">Contact</p>
+              <h1 className="mt-5 max-w-3xl text-5xl font-black leading-[0.95] tracking-[-0.06em] text-stone-950 md:text-7xl">
+                Let&apos;s talk about your next move.
+              </h1>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-stone-700">
+                Use this form to reach {siteName}. Your request will be recorded and shared with the support team for follow-up.
+              </p>
+
+              <div className="mt-8 grid gap-4">
+                {contactHighlights.map((item) => (
+                  <div key={item.title} className="flex gap-4 rounded-3xl border border-stone-200 bg-white/60 p-5 shadow-sm">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-stone-950 text-white">
+                      <item.icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h2 className="text-base font-black text-stone-950">{item.title}</h2>
+                      <p className="mt-1 text-sm leading-6 text-stone-600">{item.copy}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <ContactLeadForm />
           </div>
         </section>
       </main>
       <Footer />
     </div>
-  )
+  );
 }
